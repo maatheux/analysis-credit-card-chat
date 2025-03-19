@@ -1,0 +1,14 @@
+﻿[
+  {
+    "chat": "Atendente: Qual o tipo da sua conta?\nCliente: Gold",
+    "result": "Gold"
+  },
+  {
+    "chat": "Atendente: Poderia me informar qual o nível da sua conta?\nCliente: Silver",
+    "result": "Silver"
+  },
+  {
+    "chat": "Atendente: Você cliente de qual nível?\nCliente: Diamond",
+    "result": "Diamond"
+  }
+]

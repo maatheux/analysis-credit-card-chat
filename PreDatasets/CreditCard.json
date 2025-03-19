@@ -1,0 +1,18 @@
+﻿[
+  {
+    "chat": "Atendente: Possui cartão?\nCliente: Sim",
+    "result": "Sim"
+  },
+  {
+    "chat": "Atendente: Possui cartão?\nCliente: Não",
+    "result": "Não"
+  },
+  {
+    "chat": "Atendente: Você já tem cartão conosco?\nSim",
+    "result": "Sim"
+  },
+  {
+    "chat": "Atendente: Você já tem cartão conosco?\nNão",
+    "result": "Não"
+  }
+]
