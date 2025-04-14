@@ -35,16 +35,18 @@ def train_model(model, dataset):
     training_args = TrainingArguments(
         output_dir="./Results/fine_result",
         per_device_train_batch_size=1,
-        gradient_accumulation_steps=4,  # Acumula gradientes para simular batch maior
+        gradient_accumulation_steps=8,  # Acumula gradientes para simular batch maior
         num_train_epochs=3,
         save_steps=500,
         logging_steps=100,
         learning_rate=5e-5,
-        fp16=True,
+        no_cuda=True,
+        fp16=False,
         optim="adafactor",  # Otimizador mais leve que AdamW
         lr_scheduler_type="cosine",  # Agendador de learning rate eficiente
         warmup_steps=100,
-        report_to="none"  # Desativa logs desnecessários
+        gradient_checkpointing=True, # Economiza VRAM (ativa checkpointing)
+        report_to="none",  # Desativa logs desnecessários
     )
     
     trainer = Trainer(
@@ -62,10 +64,11 @@ def train_model(model, dataset):
 
 
 if __name__ == "__main__":
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
-    model = LlamaForCausalLM.from_pretrained("meta-llama/Llama-3.2-1B") # .to("cpu") ou pode ser outro arg: device_map = "auto" -> forcar ou escolher auto
-    
-    model = model.to("cuda") # manda modelo para GPU
+    tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-2")
+    model = AutoModelForCausalLM.from_pretrained("microsoft/phi-2", device_map="cpu", torch_dtype=torch.float32) # .to("cpu") ou pode ser outro arg: device_map = "auto" -> forcar ou escolher auto
+
+    # torch.cuda.empty_cache()
+    # model = model.to("cuda") # manda modelo para GPU
     
     tokenizer.pad_token = tokenizer.eos_token  # token de fim de texto, pois o modelo nao possui um token padding padrao
     
